@@ -1,0 +1,39 @@
+Return-Path: <openlava@localhost.localdomain>
+X-Original-To: lubo
+Delivered-To: lubo@localhost.localdomain
+Received: by localhost (Postfix, from userid 1000)
+	id 9770A9B0C9A; Thu, 20 Apr 2017 17:47:22 +0000 (UTC)
+To: lubo@localhost.localdomain
+From: LSF <openlava@localhost.localdomain>
+Sender: LSF System <openlava@cluster-master.localdomain>
+Subject: Job 853: <echo my first job;sleep 5> Done
+Message-Id: <20170420174722.9770A9B0C9A@localhost>
+Date: Thu, 20 Apr 2017 17:47:22 +0000 (UTC)
+
+Job <echo my first job;sleep 5> was submitted from host <cluster-master> by user <lubo>.
+Job was executed on host(s) <cluster-master>, in queue <normal>, as user <lubo>.
+</home/lubo> was used as the home directory.
+</var/spool/mail> was used as the working directory.
+Started at Thu Apr 20 17:47:17 2017
+Results reported at Thu Apr 20 17:47:22 2017
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+echo my first job;sleep 5
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :      0.01 sec.
+    Max Memory :         2 MB
+    Max Swap   :       131 MB
+
+    Max Processes  :         1
+
+The output (if any) follows:
+
+my first job

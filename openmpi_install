@@ -1,0 +1,22 @@
+#!/bin/bash
+
+wget https://www.open-mpi.org/software/ompi/v2.1/downloads/openmpi-2.1.0.tar.gz
+
+tar -xvzf openmpi-2.1.0.tar.gz
+
+cd openmpi-2.1.0
+
+##############
+# compilers needed for mpi to install
+##############
+yum install gcc-c++
+./configure --prefix=/usr/local
+make all install
+
+touch /etc/profile.d/openmpi.sh
+chown root:root openmpi.sh
+chmod +x openmpi.sh
+echo "export PATH=$PATH:/usr/local/bin:/usr/local/lib" > /etc/profile.d/openmpi.sh
+
+
+

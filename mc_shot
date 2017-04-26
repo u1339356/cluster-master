@@ -1,0 +1,56 @@
+  Left     File     Command     Options     Right
+l<q /home/lubo qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq.[^]>kl<q /home/lubo qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq.[^]>k
+x'n                              Name                               x Size  xModify time xx'n                              Name                               x Size  xModify time x
+x/..                                                                xUP--DIRxApr 13 10:19xx/..                                                                xUP--DIRxApr 13 10:19x
+x/.cache                                                            x     18xApr 20 16:07xx/.cache                                                            x     18xApr 20 16:07x
+x/.config                                                           x     18xApr 20 16:07xx/.config                                                           x     18xApr 20 16:07x
+x/.lsbatch                                                          x      6xApr 20 19:43xx/.lsbatch                                                          x      6xApr 20 19:43x
+x/.ssh                                                              x      6xApr 20 19:57xx/.ssh                                                              x      6xApr 20 19:57x
+x/Maildir                                                           x     77xApr 20 19:40xx/Maildir                                                           x     77xApr 20 19:40x
+x/back_old                                                          x   4096xApr 25 10:18xx/back_old                                                          x   4096xApr 25 10:18x
+x/helpers                                                           x     96xApr 19 20:07xx/helpers                                                           x     96xApr 19 20:07x
+x/mail                                                              x     45xApr 20 16:25xx/mail                                                              x     45xApr 20 16:25x
+x/mpitutorial                                                       x   4096xApr 21 19:32xx/mpitutorial                                                       x   4096xApr 21 19:32x
+x/openmpi-2.1.0                                                     x   4096xApr 13 15:50xx/openmpi-2.1.0                                                     x   4096xApr 13 15:50x
+x/test                                                              x      6xApr 18 15:40xx/test                                                              x      6xApr 18 15:40x
+x .addressbook                                                      x      0xApr 20 16:24xx .addressbook                                                      x      0xApr 20 16:24x
+x .bash_history                                                     x  13134xApr 21 19:32xx .bash_history                                                     x  13134xApr 21 19:32x
+x .bash_logout                                                      x     18xAug  2  2016xx .bash_logout                                                      x     18xAug  2  2016x
+x .bash_profile                                                     x    193xAug  2  2016xx .bash_profile                                                     x    193xAug  2  2016x
+x .bashrc                                                           x    256xApr 12 22:16xx .bashrc                                                           x    256xApr 12 22:16x
+x .pinerc                                                           x  24373xApr 20 18:23xx .pinerc                                                           x  24373xApr 20 18:23x
+x C0A8                                                              x    245xApr 18 17:57xx C0A8                                                              x    245xApr 18 17:57x
+x authorized_keys                                                   x    401xApr 12 22:28xx authorized_keys                                                   x    401xApr 12 22:28x
+x*change_hostname                                                   x     90xApr 18 22:29xx*change_hostname                                                   x     90xApr 18 22:29x
+x*check_sevices                                                     x    455xApr 20 10:48xx*check_sevices                                                     x    455xApr 20 10:48x
+x dead.letter                                                       x    373xApr 20 16:34xx dead.letter                                                       x    373xApr 20 16:34x
+x dhcpd_tftpd_install                                               x   4383xApr 12 21:35xx dhcpd_tftpd_install                                               x   4383xApr 12 21:35x
+x*down_services                                                     x     89xApr 12 21:40xx*down_services                                                     x     89xApr 12 21:40x
+x dstat_shot                                                        x   2210xApr 25 10:37xx dstat_shot                                                        x   2210xApr 25 10:37x
+x grep                                                              x      0xApr 21 14:04xx grep                                                              x      0xApr 21 14:04x
+x image_node_build                                                  x    505xApr 13 19:43xx image_node_build                                                  x    505xApr 13 19:43x
+x*initramfs_build                                                   x    835xApr 13 20:38xx*initramfs_build                                                   x    835xApr 13 20:38x
+x*job.sh                                                            x     67xApr 20 15:10xx*job.sh                                                            x     67xApr 20 15:10x
+x*job2_paralell.py                                                  x    184xApr 21 17:24xx*job2_paralell.py                                                  x    184xApr 21 17:24x
+x job_submition                                                     x   1047xApr 21 16:35xx job_submition                                                     x   1047xApr 21 16:35x
+x mc_dstat_puppet_shot                                              x    517xApr 25 10:36xx mc_dstat_puppet_shot                                              x    517xApr 25 10:36x
+x meeting                                                           x   1057xApr 21 16:35xx meeting                                                           x   1057xApr 21 16:35x
+x meeting.save                                                      x   1057xApr 21 18:27xx meeting.save                                                      x   1057xApr 21 18:27x
+x mpi                                                               x    189xApr 21 18:27xx mpi                                                               x    189xApr 21 18:27x
+x nfs_install                                                       x   1005xApr 13 13:59xx nfs_install                                                       x   1005xApr 13 13:59x
+x numpy_hello.py                                                    x    478xApr 21 15:35xx numpy_hello.py                                                    x    478xApr 21 15:35x
+x open_lava_install                                                 x   1673xApr 19 19:45xx open_lava_install                                                 x   1673xApr 19 19:45x
+x openmpi_install                                                   x    447xApr 13 16:13xx openmpi_install                                                   x    447xApr 13 16:13x
+x problems_encountered                                              x    551xApr 12 23:06xx problems_encountered                                              x    551xApr 12 23:06x
+x puppet_install                                                    x   1822xApr 18 20:43xx puppet_install                                                    x   1822xApr 18 20:43x
+x pxe_boot_node                                                     x   4274xApr 20 11:10xx pxe_boot_node                                                     x   4274xApr 20 11:10x
+x*reboot_nodes                                                      x     63xApr 20 12:40xx*reboot_nodes                                                      x     63xApr 20 12:40x
+x*shutdown_nodes                                                    x     64xApr 20 12:39xx*shutdown_nodes                                                    x     64xApr 20 12:39x
+x site.pp                                                           x     98xApr 25 10:36xx site.pp                                                           x     98xApr 25 10:36x
+x*start_all_services                                                x    361xApr 18 16:19xx*start_all_services                                                x    361xApr 18 16:19x
+tqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqutqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqu
+xUP--DIR                                                                                 xxUP--DIR                                                                                 x
+mqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq 3538M/8178M (43%) qjmqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq 3538M/8178M (43%) qj
+Hint: To look at the output of a command in the viewer, use M-!
+[root@node24 lubo]#                                                                                                                                                              [^]
+ 1Help             2Menu             3View             4Edit             5Copy             6RenMov           7Mkdir            8Delete           9PullDn          10Quit

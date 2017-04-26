@@ -1,0 +1,44 @@
+#!/bin/bash 
+
+#http://www.itzgeek.com/how-tos/linux/centos-how-tos/how-to-setup-nfs-server-on-centos-7-rhel-7-fedora-22.html
+
+mkdir storage
+chmod 777 /storage
+yum install nfs-utils libnfsidmap
+systemctl enable rpcbind
+systemctl enable nfs-server
+systemctl start rpcbind
+systemctl start nfs-server
+systemctl start rpc-statd
+systemctl start nfs-idmapd
+
+echo "/storage *(rw,sync,no_root_squash)
+/usr *(ro)" > /etc/exports
+exportfs -r
+
+firewall-cmd --permanent --zone public --add-service mountd
+firewall-cmd --permanent --zone public --add-service rpc-bind
+firewall-cmd --permanent --zone public --add-service nfs
+firewall-cmd --reload
+showmount
+showmount -e
+
+############
+## client config
+############
+
+yum -y install nfs-utils libnfsidmap
+
+systemctl enable rpcbind
+systemctl start rpcbind
+
+#test only
+showmount -e 192.168.1.243
+
+mkdir /storage
+mkdir /usr
+
+echo "192.168.1.243:/storage/ /storage nfs rw,sync,hard,intr 0 0
+192.168.1.243:/usr/ /usr nfs ro,nolock,nocto,actimeo=3600 0 0" >> /etc/fstab
+
+init 6

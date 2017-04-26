@@ -1,0 +1,28 @@
+#!/bin/bash
+mkdir node /home/lubo/node/initramfs
+cd /home/lubo/node/initramfs
+mkdir bin dev etc proc sbin sys usr root2
+cp /etc/hosts /home/lubo/node/initramfs/etc/
+touch /home/lubo/node/initramfs/init
+
+echo "#!/bin/sh
+
+export PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/lib"
+
+# Mount root in tmpfs
+mount -t tmpfs -o size=128M tmpfs /root2
+
+# Unpack the root file system
+tar -x -z -f root2.tar.gz
+
+# Mount /usr read-only and /home read-write from NFS server
+mount -t nfs4 -o ro 192.168.1.243:/usr /root2/usr
+mount -t nfs4 -o rw 192.168.1.243:/storage /root2/storage
+
+# Switch the root filesystem and start normal boot process
+exec switch_root /root2 /sbin/init
+
+# Drop to shell if switch_root fails
+sh" > /home/lubo/node/initramfs/init
+
+tar -czf /home/lubo/node/initramfs/root2.tar.gz /home/lubo/node/initramfs/root2
