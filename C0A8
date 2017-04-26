@@ -1,8 +1,0 @@
-# default is label 'linux'
-# boots a linux kernel and mounts rootfs.gz as a root file system on a 512MiB r$
-default net
-
-label   net
-        kernel bzImage
-        append initrd=initramfs.cpio.gz rw ip=dhcp net.ifnames=0 selinux=0 init=bootarg
-

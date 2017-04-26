@@ -1,4 +1,0 @@
-#!/bin/bash
-
-ssh root@node11 "init 6"
-ssh root@node16 "init 6"

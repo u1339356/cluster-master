@@ -1,5 +1,0 @@
-#!/bin/bash
-
-echo "dhcpd down"
-systemctl stop dhcpd 
-systemctl status dhcpd |grep Active
