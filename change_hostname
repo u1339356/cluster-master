@@ -1,0 +1,4 @@
+#!/bin/bash
+#/tftpboot/centos7/root/etc/rc.d/init.d/change_hostname/tftpboot/centos7/root/etc/rc.d/init.d/change_hostname
+
+hostnamectl set-hostname $(echo "node"$(hostname -I | cut -d. -f4)) --static

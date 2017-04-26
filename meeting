@@ -1,0 +1,25 @@
+mention success and failures like ntp didnt work and went for chrony 
+
+as a source code if it is something interesting put it in otherwise put in on github
+
+use open source license subsection -> use viral license GPL2 -> implicatins between certsain licenses 
+GPL2 vs GPL3 or GPL2 and later
+
+create table for scripts ... script and wat does it do 
+name, location of the script , client or server and what they do
+
+explain why nodes don't have internet access because they shouldn't be touched duing operation... 
+they are just for computing not for any installation
+
+security options like MAC checking , refuse give IP or any other options, snif MACs by netstat or nmap
+
+prove that puppet an change some stuff on nodes simple script
+write basic script to install somthing like screen or wget and make screen shot
+
+for openlava find/download some example script for paralel jobs that both are tested at once
+
+this could be done but its not ... augeaus lenses structuring the scripts and config file
+
+change all to variables, at the begining of the script 
+
+

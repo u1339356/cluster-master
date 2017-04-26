@@ -1,0 +1,152 @@
+#!/bin/bash
+
+#https://www.server-world.info/en/note?os=CentOS_7&p=pxe&f=4
+
+mkdir -p /var/lib/tftpboot/centos7/root
+
+yum groups -y install "Compute Node" --releasever=7 --installroot=/tftpboot/centos7/root/
+
+yum group list
+
+cp /etc/shadow /tftpboot/centos7/root/etc/
+
+nano /tftpboot/centos7/root/etc/fstab
+
+none    /tmp        tmpfs   defaults   0 0
+tmpfs   /dev/shm    tmpfs   defaults   0 0
+sysfs   /sys        sysfs   defaults   0 0
+proc    /proc       proc    defaults   0 0
+
+nano C0A8...
+default node
+
+label   node
+        kernel centos7/vmlinuz
+        append initrd=centos7/initrd.img root=nfs:192.168.1.243:/tftpboot/centos7/root rw selinux=0
+
+
+nano /etc/exports
+/tftpboot/centos7/root *(rw,no_root_squash)
+
+systemctl start rpcbind nfs-server 
+systemctl enable rpcbind nfs-server
+
+wget -P /tftpboot/centos7/ \
+http://mirror.centos.org/centos/7/os/x86_64/images/pxeboot/vmlinuz \
+http://mirror.centos.org/centos/7/os/x86_64/images/pxeboot/initrd.img
+
+copy passwd sudoers hosts group shadow /home/folders profile
+
+#for all of them who need it
+chmod 4755 ping sudo su
+
+ssh -1 root@192.168.1.243
+
+#check open ports
+netstat -anp |grep ntp
+lsof -i | grep chrony
+
+timedatectl
+timedatectl set-timezone UTC
+
+chronyc tracking
+#########################
+#obsolete
+#ifconfig |grep -m 1 inet|sed 's/.*\(...\)/\1/'
+#hostname -I | cut -d: -f1 | awk '{print $2}'
+
+#########################
+# working one 
+#########################
+
+echo "hostnamectl set-hostname $(echo "node"$(hostname -I | cut -d. -f4)) --static" > /tftpboot/centos7/root/etc/init.d/change_hostname
+
+chmod +x  /tftpboot/centos7/root/etc/init.d/change_hostname
+
+echo "/etc/init.d/change_hostname" >> /tftpboot/centos7/root/etc/rc.d/rc.local
+
+########################
+##puppet agent install
+#######################
+##puppet agent not available through yum
+#yum install puppet-agent --installroot=/tftpboot/centos7/root/
+
+### download manualy from below and also dependecny hiera, fracter, libselinux-ruby,ruby-shadow,ruby-augeas
+http://yum.puppetlabs.com/el/7/products/x86_64/
+
+#### rpm for manual puppet agent installation https://pkgs.org/
+# + download all necessary packages
+
+yum install ruby and ruby-devel
+
+rpm -ivh puppet....
+
+echo "server = cluster-master.kdlabs.uel.ac.uk
+report = true
+" >> /tftboot/centos7/root/etc/puppet/puppet.conf
+
+#scrip tu generate 242 hosts in /etc/host on server
+
+echo "#!/bin/bash
+
+for i in {1..242}
+do
+echo "192.168.1."$i"    node"$i".kdlabs.uel.ac.uk node"$i
+done" > host_generator.sh
+
+./host_generator.sh >> /etc/hosts
+
+#do this on client
+systemctl enable puppet
+systemctl restart puppet
+
+### fix for nfs storage on client
+yum install nfs-utils
+
+### fstab
+echo "192.168.1.243:/storage  /storage nfs  defaults 0 0" >> /tftpboot/centos7/root/etc/fstab
+
+##########################################
+## Openlava installation on a node
+##########################################
+#allow all hosts to comunicate with each other
+cp /etc/hosts /tftpboot/centos7/root/etc/
+cp /home/lubo/authorized_keys /tftpboot/centos7/root/root/.ssh
+yum install -y gcc tcl tcl-devel ncurses-devel
+wget http://www.openlava.org/tarball/openlava-2.2.tar.gz
+
+tar -xvzf openlava-2.2.tar.gz
+
+cd openlava-2.2
+
+./configure
+make install
+
+cd config
+cp lsb.hosts lsb.params lsb.queues lsb.users lsf.cluster.openlava lsf.conf lsf.shared lsf.tasks openlava.* /tftpboot/centos7/root/opt/openlava-2.2/etc
+
+useradd -r openlava
+
+cd /tftpboot/centos7/root/opt/openlava-2.2/etc
+cp /home/lubo/host_openlava .
+./host_openlava >> lsf.cluster.openlava
+
+chown -R openlava:openlava /tftpboot/centos7/root/opt/openlava-2.2
+
+cp /opt/openlava-2.2/etc/openlava /etc/init.d
+chkconfig openlava on
+cp /opt/openlava-2.2/etc/openlava.* /etc/profile.d
+service openlava start
+
+lsid
+
+#########################
+#to download rpm
+#wget http://download.opensuse.org/repositories/network:/cluster/openSUSE_13.1/x86_64/openlava-2.2-1.1.x86_64.rpm.mirrorlist
+#wget http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/RPMS.classic//libtcl-8.6.6-alt1.x86_64.rpm
+#wget http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/RPMS.classic//insserv-1.16.0-alt2.x86_64.rpm
+#########################
+
+
+firewall-cmd --zone=public --permanent --add-port=6322-6325/tcp
+firewall-cmd --zone=public --permanent --add-port=6322-6325/udp
