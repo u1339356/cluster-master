@@ -1,0 +1,7 @@
+none    /tmp        tmpfs   defaults   0 0
+tmpfs   /dev/shm    tmpfs   defaults   0 0
+sysfs   /sys        sysfs   defaults   0 0
+proc    /proc       proc    defaults   0 0
+192.168.1.243:/storage  /storage nfs  defaults 0 0
+192.168.1.243:/home /home nfs defaults 0 0
+192.168.1.243:/var/spool/mail /var/spool/mail nfs defaults 0 0
