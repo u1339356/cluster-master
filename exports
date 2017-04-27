@@ -1,0 +1,4 @@
+/tftpboot/centos7/root *(rw,no_root_squash)
+/storage *(rw,sync,no_root_squash)
+/home *(rw,sync,no_root_squash)
+/var/spool/mail/ *(rw,sync,no_root_squash)
