@@ -75,7 +75,11 @@ SELINUX=permissive
 SELINUXTYPE=targeted" > /etc/selinux/config
 
 #init 6
-#sestatus should see this
+
+sestatus
+
+#After running sestatus you should see this below
+
 #SELinux status:                 enabled
 #SELinuxfs mount:                /sys/fs/selinux
 #SELinux root directory:         /etc/selinux
@@ -86,7 +90,9 @@ SELINUXTYPE=targeted" > /etc/selinux/config
 #Policy deny_unknown status:     allowed
 #Max kernel policy version:      28
 
-#getsebool -a|grep tftp
+getsebool -a|grep tftp
+
+#After running getsebool command you should see this
 #tftp_anon_write --> off
 #tftp_home_dir --> off
 
@@ -116,7 +122,7 @@ cp /usr/share/syslinux/pxelinux.0 /tftpboot/
 
 # copy linux kernel so it can be passed onto nodes by a pxe bootloader
 cp /boot/vmlinuz-$(uname -r) /tftpboot/linux
-!!!!!!
+!!
 # copy linux root filesystem image
 cp /root/rootfs.gz /tftpboot/linux
 
