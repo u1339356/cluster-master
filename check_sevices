@@ -1,19 +1,19 @@
 #!/bin/bash
 echo "IP" 
 ifconfig |grep inet
-echo "ssh"
+echo "Ssh"
 systemctl status sshd |grep Active
-echo "tftp"
+echo "Tftp"
 systemctl status tftp |grep Active
-echo "dhcpd"
+echo "Dhcpd"
 systemctl status dhcpd |grep Active
-echo "puppet server"
+echo "Puppet server"
 systemctl status puppetmaster |grep Active
-echo "puppet agent"
+echo "Puppet agent"
 systemctl status puppet |grep Active
-echo chronyd
+echo "Chronyd"
 systemctl status chronyd |grep Active
-echo OpenLava
+echo "OpenLava"
 systemctl status openlava|grep Active
 #systemctl status sshd
 #systemctl status sshd
