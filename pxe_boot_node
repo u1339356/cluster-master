@@ -25,8 +25,7 @@ label   node
         append initrd=centos7/initrd.img root=nfs:192.168.1.243:/tftpboot/centos7/root rw selinux=0
 
 
-nano /etc/exports
-/tftpboot/centos7/root *(rw,no_root_squash)
+echo "/tftpboot/centos7/root *(rw,no_root_squash)" > /etc/exports
 
 systemctl start rpcbind nfs-server 
 systemctl enable rpcbind nfs-server
@@ -35,12 +34,21 @@ wget -P /tftpboot/centos7/ \
 http://mirror.centos.org/centos/7/os/x86_64/images/pxeboot/vmlinuz \
 http://mirror.centos.org/centos/7/os/x86_64/images/pxeboot/initrd.img
 
-copy passwd sudoers hosts group shadow /home/folders profile
+cp /home/lubo/authorized_keys /tftpboot/centos7/root/root/.ssh/
+cp passwd /tftpboot/centos7/root/etc
+cp sudoers /tftpboot/centos7/root/etc
+cp hosts /tftpboot/centos7/root/etc
+cp group /tftpboot/centos7/root/etc
+cp shadow /tftpboot/centos7/root/etc
+cp -R /home/* /tftpboot/centos7/root/home
+cp /etc/profile /tftpboot/centos7/root/etc
 
 #for all of them who need it
-chmod 4755 ping sudo su
+chmod 4755 /tftpboot/centos7/root/bin/ping 
+chmod 4755 /tftpboot/centos7/root/bin/sudo 
+chmod 4755 /tftpboot/centos7/root/bin/su
 
-ssh -1 root@192.168.1.243
+#ssh -1 root@192.168.1.243
 
 #check open ports
 netstat -anp |grep ntp
@@ -50,10 +58,6 @@ timedatectl
 timedatectl set-timezone UTC
 
 chronyc tracking
-#########################
-#obsolete
-#ifconfig |grep -m 1 inet|sed 's/.*\(...\)/\1/'
-#hostname -I | cut -d: -f1 | awk '{print $2}'
 
 #########################
 # working one 
@@ -79,7 +83,7 @@ http://yum.puppetlabs.com/el/7/products/x86_64/
 
 yum install ruby and ruby-devel
 
-rpm -ivh puppet....
+rpm -ivh puppet-3.8.7-1.el7.noarch.rpm
 
 echo "server = cluster-master.kdlabs.uel.ac.uk
 report = true
@@ -110,6 +114,7 @@ echo "192.168.1.243:/storage  /storage nfs  defaults 0 0" >> /tftpboot/centos7/r
 ## Openlava installation on a node
 ##########################################
 #allow all hosts to comunicate with each other
+
 cp /etc/hosts /tftpboot/centos7/root/etc/
 cp /home/lubo/authorized_keys /tftpboot/centos7/root/root/.ssh
 yum install -y gcc tcl tcl-devel ncurses-devel
@@ -141,7 +146,7 @@ service openlava start
 lsid
 
 #########################
-#to download rpm
+#to download rpms
 #wget http://download.opensuse.org/repositories/network:/cluster/openSUSE_13.1/x86_64/openlava-2.2-1.1.x86_64.rpm.mirrorlist
 #wget http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/RPMS.classic//libtcl-8.6.6-alt1.x86_64.rpm
 #wget http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/RPMS.classic//insserv-1.16.0-alt2.x86_64.rpm
