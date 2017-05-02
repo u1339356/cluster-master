@@ -4,6 +4,7 @@
 
 mkdir storage
 chmod 777 /storage
+
 yum install nfs-utils libnfsidmap
 systemctl enable rpcbind
 systemctl enable nfs-server
@@ -12,8 +13,10 @@ systemctl start nfs-server
 systemctl start rpc-statd
 systemctl start nfs-idmapd
 
-echo "/storage *(rw,sync,no_root_squash)
-/usr *(ro)" > /etc/exports
+echo "/tftpboot/centos7/root *(rw,no_root_squash)
+/storage *(rw,sync,no_root_squash)
+/home *(rw,sync,no_root_squash)
+/var/spool/mail/ *(rw,sync,no_root_squash)" > /etc/exports
 exportfs -r
 
 firewall-cmd --permanent --zone public --add-service mountd
@@ -23,9 +26,9 @@ firewall-cmd --reload
 showmount
 showmount -e
 
-############
+#################
 ## client config
-############
+#################
 
 yum -y install nfs-utils libnfsidmap
 
@@ -39,6 +42,7 @@ mkdir /storage
 mkdir /usr
 
 echo "192.168.1.243:/storage/ /storage nfs rw,sync,hard,intr 0 0
-192.168.1.243:/usr/ /usr nfs ro,nolock,nocto,actimeo=3600 0 0" >> /etc/fstab
+192.168.1.243:/home /home nfs defaults 0 0
+192.168.1.243:/var/spool/mail /var/spool/mail nfs defaults 0 0" >> /etc/fstab
 
 init 6
