@@ -1,7 +1,8 @@
-#main kind of working install page
+#!/bin/bash
+
 # https://www.digitalocean.com/community/tutorials/how-to-install-puppet-4-in-a-master-agent-setup-on-centos-7
 
-yum install mlocate
+yum -y install mlocate
 
 timedatectl set-timezone Europe/London
 yum -y install ntp
@@ -25,7 +26,7 @@ yum install puppet-agent puppetserver puppet-server rubygem-puppet-lint -y
 
 vi /etc/sysconfig/puppetserver
 
-#change 2g to 512m remo end of the line
+#change 2g to 512m remove end of the line
 
 #http://augeas.net/
 
@@ -61,18 +62,18 @@ file { '/tmp/hello-file':
     mode    => '0644',
   }
 
-#FIREWALL !!!!!!!!!!
+#FIREWALL port need to be open!!!
 firewall-cmd --zone=public --add-port=8140/tcp --permanent
 firewall-cmd --reload
 
 
 #DNS for KDs
-161.76.120.7
-172.21.0.5
+#161.76.120.7
+#172.21.0.5
 
 
-rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
-rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+#rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
+#rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 #invoke puppet agent test
 puppet agent -t
