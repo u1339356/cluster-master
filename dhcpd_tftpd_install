@@ -104,54 +104,34 @@ firewall-cmd --reload
 
 ####### might be mess
 #echo "-A INPUT -m state --state NEW -m udp -p udp -m udp --dport 69 -j ACCEPT" > /etc/sysconfig/iptables
-#firewall-cmd --zone=public --add-service=tftp --permanent
-#firewall-cmd --reload
+firewall-cmd --zone=public --add-service=tftp --permanent
+firewall-cmd --reload
 ###################################
 systemctl status firewalld
 systemctl enable firewalld
 systemctl start firewalld
 
-### not working yet!!!
-
 #PXE
 # create directories required for pxe bootloader
+
 mkdir -p /tftpboot/{linux,pxelinux.cfg}
 
 # copy pxe boot loader (comes with syslinux package)
 cp /usr/share/syslinux/pxelinux.0 /tftpboot/
 
-# copy linux kernel so it can be passed onto nodes by a pxe bootloader
-cp /boot/vmlinuz-$(uname -r) /tftpboot/linux
-!!
-# copy linux root filesystem image
-cp /root/rootfs.gz /tftpboot/linux
+#download kernel
 
-###
-###two of them because of testing 2nd works currently with pegasus images
-###
-echo "# default is label 'linux'
-# boots a linux kernel and mounts rootfs.gz as a root file system on a 512MiB ramdisk
-default linux
+cd /tftboot
+wget -P /tftpboot/centos7/ \
+http://mirror.centos.org/centos/7/os/x86_64/images/pxeboot/vmlinuz \
+http://mirror.centos.org/centos/7/os/x86_64/images/pxeboot/initrd.img
 
-label	linux
-	kernel linux/vmlinuz
-	append initrd=linux/rootfs.gz root=/dev/ram ramdisk_size=524288 rw ip=dhcp
+echo "
+# boots a linux kernel and mounts nfs file system as a root file system
+
+label   node
+        kernel centos7/vmlinuz
+        append initrd=centos7/initrd.img root=nfs:192.168.1.243:/tftpboot/centos7/root rw selinux=0
 " > /tftpboot/pxelinux.cfg/C0A8
-##################################
-#second one
-#################################
-default net
 
-label   net
-        kernel bzImage
-        append initrd=initramfs.cpio.gz rw ip=dhcp net.ifnames=0 selinux=0
-
-#C0A8 is equvivalet to 192168
-
-#########################################
-#
-# Creating initial root file system
-#
-#########################################
-
-
+#C0A8 is equvivalet to 192.168
