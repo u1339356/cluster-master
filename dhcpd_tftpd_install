@@ -102,25 +102,21 @@ setsebool -P tftp_home_dir 1
 firewall-cmd --permanent --zone=public --add-service=tftp
 firewall-cmd --reload
 
-####### might be mess
-#echo "-A INPUT -m state --state NEW -m udp -p udp -m udp --dport 69 -j ACCEPT" > /etc/sysconfig/iptables
 firewall-cmd --zone=public --add-service=tftp --permanent
 firewall-cmd --reload
-###################################
+
 systemctl status firewalld
 systemctl enable firewalld
 systemctl start firewalld
 
 #PXE
 # create directories required for pxe bootloader
-
 mkdir -p /tftpboot/{linux,pxelinux.cfg}
 
 # copy pxe boot loader (comes with syslinux package)
 cp /usr/share/syslinux/pxelinux.0 /tftpboot/
 
 #download kernel
-
 cd /tftboot
 wget -P /tftpboot/centos7/ \
 http://mirror.centos.org/centos/7/os/x86_64/images/pxeboot/vmlinuz \
